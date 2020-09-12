@@ -9,6 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    func updateUIAfterGuess() {
+        
+        guessLetterButton.isEnabled = false
+        
+        guessedLetterTextField.resignFirstResponder()
+        guessedLetterTextField.text = ""
+    }
+    
     @IBOutlet weak var wordsGuessedLabel: UILabel!
     @IBOutlet weak var wordsRemainingLabel: UILabel!
     @IBOutlet weak var wordsMissedLabel: UILabel!
@@ -16,6 +24,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var gameStatusLabel: UILabel!
     @IBOutlet weak var guessLetterButton: UIButton!
+    
     @IBOutlet weak var guessedLetterTextField: UITextField!
     @IBOutlet weak var wordBeingRevealedLabel: UILabel!
     @IBOutlet weak var playAgainButton: UIButton!
@@ -23,12 +32,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        guessLetterButton.isEnabled = false
+        
     }
     @IBAction func guessLetterButtonPressed(_ sender: Any) {
+        updateUIAfterGuess()
     }
     @IBAction func playAgainButtonPressed(_ sender: Any) {
     }
     
-
+    @IBAction func doneKeyPressed(_ sender: UITextField) {
+        updateUIAfterGuess()
+    }
+    
+    @IBAction func guessedLetterFieldChanged(_ sender: UITextField) {
+        let text = guessedLetterTextField.text!
+        guessLetterButton.isEnabled = !text.isEmpty
+    }
 }
 
