@@ -17,6 +17,13 @@ class ViewController: UIViewController {
         guessedLetterTextField.text = ""
     }
     
+    func lastCharacter(text : String) -> String{
+        guard let text1 = text.last else {
+            return ""
+        }
+        return String(text1)
+    }
+    
     @IBOutlet weak var wordsGuessedLabel: UILabel!
     @IBOutlet weak var wordsRemainingLabel: UILabel!
     @IBOutlet weak var wordsMissedLabel: UILabel!
@@ -47,8 +54,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func guessedLetterFieldChanged(_ sender: UITextField) {
-        let text = guessedLetterTextField.text!
-        guessLetterButton.isEnabled = !text.isEmpty
+        let text = guessedLetterTextField.text
+        
+        guessedLetterTextField.text = lastCharacter(text: text!)
+       
+        guessLetterButton.isEnabled = !text!.isEmpty
     }
 }
 
